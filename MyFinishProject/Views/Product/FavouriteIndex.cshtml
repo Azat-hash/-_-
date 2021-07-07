@@ -1,0 +1,94 @@
+﻿@using MyFinishProject.Models.HelpersModels
+@model List<Favourites>
+@{
+    ViewBag.Title = "FavouriteIndex";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
+<script src="//code.jquery.com/jquery.min.js"></script>
+<div class="d-flex justify-content-between flex-wrap scale">
+    @foreach (var item in Model)
+    {
+    <div class="d-flex flex-column">
+        <p>@item.Product.Name <br /> @item.User.Email</p>
+        <img class="img scale" src="data:image;base64,@System.Convert.ToBase64String(item.Product.Images ?? new byte[0])" onerror="this.src='';" onclick="location.href='/Product/Details/@item.Id'" />
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div>
+                        <h5 class="modal-title" ></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Вы точно хотите удалить?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" data-dismiss="modal">Отмена</button>
+                        <button type="button" class="btn btn-primary" onclick="location.href = 'https://localhost:44372/Product/DeleteFromFavourite/@item.Id'">Удалить</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+            Удалить
+        </button>
+    </div>
+        
+    }
+</div>
+
+<script type="text/javascript">
+    $(function ($) {
+        $(document).on('click', '.box-btn', function (event) {
+            $(this).find('.glyphicon').toggleClass('red').toggleClass('glyphicon-heart-empty glyphicon-heart');
+        });
+    });
+
+</script>
+<style>
+    .button {
+        padding: 10px 20px;
+        font-size: 15px;
+        text-align: center;
+        cursor: pointer;
+        outline: none;
+        color: #fff;
+        background-color: #04AA6D;
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 9px #999;
+        height: 40px;
+    }
+
+        .button:hover {
+            background-color: #3e8e41
+        }
+
+        .button:active {
+            background-color: #3e8e41;
+            box-shadow: 0 5px #666;
+            transform: translateY(4px);
+        }
+
+    .img {
+        border-radius: 10px;
+        width: 300px;
+        height: 400px
+    }
+
+    .scale {
+        display: inline-block;
+        overflow: hidden;
+    }
+
+        .scale img {
+            transition: 1s;
+        }
+
+            .scale img:hover {
+                transform: scale(0.9);
+            }
+</style>

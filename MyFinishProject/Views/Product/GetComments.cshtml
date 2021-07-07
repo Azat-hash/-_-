@@ -1,0 +1,78 @@
+﻿@using MyFinishProject.Models.HelpersModels
+@model IEnumerable<Comment>
+@{
+    ViewBag.Title = "GetComments";
+}
+<html>
+<body>
+    <div id="content">
+        <div>
+            <div>
+                <div class="container">
+                    <div class="row">
+                        <div class="page-header">
+                            <h1>Комментарии</h1>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="comments-list">
+                                @foreach (var comment in Model)
+                                {
+                                    <div class="media">
+                                        <p class="pull-right"><small>@comment.Date</small></p>
+                                        @if (User.IsInRole("admin"))
+                                        {
+                                            <p class="pull-right" @*id="delete*@>
+                                                <button type="submit" id="@comment.Id" class="delete button" onclick="location.href = '/Product/DeleteFromComments/@comment.Id'">Удалить</button>
+                                            </p>
+                                        }
+                                        <div class="media-body">
+                                            <h4 class="media-heading user_name">@comment.User.Email</h4>
+                                            <p>@comment.Description</p>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    </div>
+    <script type="text/javascript">
+            //$("#delete").click(function () {
+            //    $("#content").load("#content");
+            //    $(document).on('click', '.delete', function (event) {
+            //        console.log(event.target.id);
+            //        $.ajax({
+            //            url: `/Product/DeleteFromComments/${event.target.id}`,
+            //            method: 'Delete',
+            //            dataType: 'html',
+            //            success: function (data) {
+            //                $("#content").html(data)
+            //            }
+            //        })
+            //    });
+            //});
+
+    </script>
+    <style type="text/css">
+        .button {
+            border-radius: 3px;
+        }
+
+        .user_name {
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .comments-list .media {
+            border-bottom: 1px dotted #ccc;
+        }
+    </style>
+</body>
+</html>
+
+

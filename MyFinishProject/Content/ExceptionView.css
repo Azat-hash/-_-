@@ -1,0 +1,249 @@
+﻿.panel {
+    background-color: transparent;
+}
+
+.main {
+    position: relative;
+    z-index: 1000000
+}
+
+@keyframes move_wave {
+    0% {
+        transform: translateX(0) translateZ(0) scaleY(1)
+    }
+
+    50% {
+        transform: translateX(-25%) translateZ(0) scaleY(0.55)
+    }
+
+    100% {
+        transform: translateX(-50%) translateZ(0) scaleY(1)
+    }
+}
+
+.waveWrapper {
+    overflow: scroll;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    margin: auto;
+}
+
+.waveWrapperInner {
+    position: absolute;
+    width: 100%;
+    overflow: hidden;
+    height: 100%;
+    bottom: -1px;
+    background-image: linear-gradient(to top, #86377b 20%, #27273c 80%);
+}
+
+.bgTop {
+    z-index: 15;
+    opacity: 0.5;
+}
+
+.bgMiddle {
+    z-index: 10;
+    opacity: 0.75;
+}
+
+.bgBottom {
+    z-index: 5;
+}
+
+.wave {
+    position: absolute;
+    left: 0;
+    width: 200%;
+    height: 100%;
+    background-repeat: repeat no-repeat;
+    background-position: 0 bottom;
+    transform-origin: center bottom;
+}
+
+.waveTop {
+    background-size: 50% 100px;
+}
+
+.waveAnimation .waveTop {
+    animation: move-wave 3s;
+    -webkit-animation: move-wave 3s;
+    -webkit-animation-delay: 1s;
+    animation-delay: 1s;
+}
+
+.waveMiddle {
+    background-size: 50% 120px;
+}
+
+.waveAnimation .waveMiddle {
+    animation: move_wave 10s linear infinite;
+}
+
+.waveBottom {
+    background-size: 50% 100px;
+}
+
+.waveAnimation .waveBottom {
+    animation: move_wave 15s linear infinite;
+}
+
+
+#side-checkbox {
+    display: none;
+}
+
+.block-panel {
+}
+
+.side-panel {
+    position: fixed;
+    z-index: 999999;
+    top: 0;
+    left: -360px;
+    background: #337AB7;
+    transition: all 0.5s;
+    width: 320px;
+    height: 100vh;
+    box-shadow: 10px 0 20px rgba(0,0,0,0.4);
+    color: #FFF;
+    padding: 40px 20px;
+}
+
+.side-title {
+    font-size: 20px;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #BFE2FF;
+}
+
+.side-button-1-wr {
+    text-align: center;
+}
+
+.side-button-1 {
+    display: inline-block;
+}
+
+    .side-button-1 .side-b {
+        margin: 10px;
+        text-decoration: none;
+        position: relative;
+        font-size: 20px;
+        line-height: 20px;
+        padding: 12px 30px;
+        color: #FFF;
+        font-weight: bold;
+        text-transform: uppercase;
+        font-family: 'Roboto Condensed', Тahoma, sans-serif;
+        background: #337AB7;
+        cursor: pointer;
+        border: 2px solid #BFE2FF;
+    }
+
+        .side-button-1 .side-b:hover,
+        .side-button-1 .side-b:active,
+        .side-button-1 .side-b:focus {
+            color: #FFF;
+        }
+
+        .side-button-1 .side-b:after,
+        .side-button-1 .side-b:before {
+            position: absolute;
+            height: 4px;
+            left: 50%;
+            bottom: -6px;
+            content: "";
+            transition: all 280ms ease-in-out;
+            width: 0;
+        }
+
+    .side-button-1 .side-open:after,
+    .side-button-1 .side-open:before {
+        background: green;
+    }
+
+    .side-button-1 .side-close:after,
+    .side-button-1 .side-close:before {
+        background: red;
+    }
+
+    .side-button-1 .side-b:before {
+        top: -6px;
+    }
+
+    .side-button-1 .side-b:hover:after,
+    .side-button-1 .side-b:hover:before {
+        width: 100%;
+        left: 0;
+    }
+
+    .side-button-1 .side-close {
+        display: none;
+    }
+
+#side-checkbox:checked + .side-panel + .side-button-1-wr .side-button-1 .side-open {
+    display: none;
+}
+
+#side-checkbox:checked + .side-panel + .side-button-1-wr .side-button-1 .side-close {
+    display: block;
+}
+
+#side-checkbox:checked + .side-panel {
+    left: 0;
+}
+
+
+.btt-center {
+    text-align: center;
+    padding-right: 100px;
+    border-radius: 10px;
+}
+
+.text-shadow {
+    color: white;
+    text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+}
+
+.color:hover {
+    background: #53ea93;
+}
+
+.scale {
+    transition: 1s;
+}
+
+    .scale:hover {
+        transform: scale(1.1);
+    }
+
+.img-radius {
+    border-radius: 10px;
+}
+
+a.glo {
+    color: #00c6ff;
+    padding: 15px 20px;
+    text-transform: uppercase;
+    width: 350px;
+    text-decoration: none;
+    text-align: center;
+    margin: 30px 0;
+    display: block;
+    background-image: linear-gradient(to left,transparent,transparent 50%,#00c6ff 50%,#00c6ff);
+    background-position: 100% 0;
+    background-size: 200% 100%;
+    transition: all .25s ease-in;
+    font: 400 18px tahoma;
+    border: 1px solid #00C6FF;
+    left: 200px;
+}
+
+    a.glo:hover {
+        background-position: 0 0;
+        color: #fff;
+    }

@@ -1,0 +1,103 @@
+﻿@using MyFinishProject.Models.HelpersModels
+@model IEnumerable<Review>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+        crossorigin="anonymous">
+</script>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<br />
+<div id="review">
+    <button class="btn btn-success" onclick="location.href='/Product/Index'">Назад</button>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10">
+                <div class="page-header">
+                    <h1>Отзывы</h1>
+                </div>
+                <div ></div>
+                @foreach (var review in Model)
+                {
+                    <div > 
+                        <div class="media">
+                            <div>
+                                <p class="pull-right"><small>@review.ReviewDate</small></p>
+                                <br />
+                                @if (User.IsInRole("admin"))
+                                {
+                                    <p class="pull-right" id="delete">
+                                        <button type="submit" class="btn btn-success" id="@review.Id" onclick="location.href = '/Home/DeleteReviewMessage/@review.Id'">Удалить</button>
+                                    </p>
+                                }
+                                <div class="media-body">
+                                    <h4 class="media-heading user_name">@review.User.Email</h4>
+                                    <p>@review.Message</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            </div>
+            <div>
+                <div >
+                    <div>
+                        <div class="form-group">
+                            <div id="review" style="display:block; height:400px;overflow-y:scroll"></div>
+                            <label for="textArea">Оставьте ваш отзыв</label>
+                            <textarea class="form-control textarea" id="Message" cols="2" rows="5"></textarea>
+                            <button type="submit" class="send btn btn-success" id="reload">Отправить</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#reload").click(function () {
+            console.log(1);
+            $("#review").load("#review");
+            $.ajax({
+                type: "POST",
+                url: '/Home/SendReviewMessage',
+                data: { 'Message': $('#Message').val() },
+                dataType: 'html',
+                success: function (data) {
+                    $("#review").html(data)
+                },
+            });
+            console.log(2);
+        });
+
+        //$("#delete").click(function () {
+        //    console.log(1);
+        //    $("#review").load("#review");
+        //    $.ajax({
+        //        type: "POST",
+        //        url: `/Home/DeleteReviewMessage/${event.target.id}`,
+        //        dataType: 'html',
+        //        success: function (data) {
+        //            $("#review").html(data)
+        //        },
+        //    });
+        //    console.log(2);
+        //});
+    });
+
+</script>
+<style type="text/css">
+    .user_name {
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .comments-list .media {
+        border-bottom: 1px dotted #ccc;
+    }
+</style>
+

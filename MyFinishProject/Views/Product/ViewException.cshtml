@@ -1,0 +1,298 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+</head>
+<div class="">
+    <h1 style="text-align:center" class="erorr_  text-shadow">404</h1>
+    <div class="toggles">
+        <div>
+            <a href="https://localhost:44372/Product/Index" style="text-align:center;" class="glo btt-center">Повторить</a>
+        </div>
+    </div>
+    <div class="container text-center">
+        <div class="col-sm-12 ">
+
+        </div>
+    </div>
+    <div class="rain front-row">
+
+    </div>
+    <div class="rain back-row"></div>
+</div>
+<body class="back-row-toggle splat-toggle">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script>
+    <script>
+        var makeItRain = function () {
+            $('.rain').empty();
+
+            var increment = 0;
+            var drops = "";
+            var backDrops = "";
+
+            while (increment < 100) {
+                var randoHundo = (Math.floor(Math.random() * (98 - 1 + 1) + 1));
+                var randoFiver = (Math.floor(Math.random() * (5 - 2 + 1) + 2));
+                increment += randoFiver;
+                drops += '<div class="drop" style="left: ' + increment + '%; bottom: ' + (randoFiver + randoFiver - 1 + 100) + '%; animation-delay: 0.' + randoHundo + 's; animation-duration: 0.5' + randoHundo + 's;"><div class="stem" style="animation-delay: 0.' + randoHundo + 's; animation-duration: 0.5' + randoHundo + 's;"></div><div class="splat" style="animation-delay: 0.' + randoHundo + 's; animation-duration: 0.5' + randoHundo + 's;"></div></div>';
+                backDrops += '<div class="drop" style="right: ' + increment + '%; bottom: ' + (randoFiver + randoFiver - 1 + 100) + '%; animation-delay: 0.' + randoHundo + 's; animation-duration: 0.5' + randoHundo + 's;"><div class="stem" style="animation-delay: 0.' + randoHundo + 's; animation-duration: 0.5' + randoHundo + 's;"></div><div class="splat" style="animation-delay: 0.' + randoHundo + 's; animation-duration: 0.5' + randoHundo + 's;"></div></div>';
+            }
+
+            $('.rain.front-row').append(drops);
+            $('.rain.back-row').append(backDrops);
+        }
+
+        $('.splat-toggle.toggle').on('click', function () {
+            $('body').toggleClass('splat-toggle');
+            $('.splat-toggle.toggle').toggleClass('active');
+            makeItRain();
+        });
+
+        $('.back-row-toggle.toggle').on('click', function () {
+            $('body').toggleClass('back-row-toggle');
+            $('.back-row-toggle.toggle').toggleClass('active');
+            makeItRain();
+        });
+
+        $('.single-toggle.toggle').on('click', function () {
+            $('body').toggleClass('single-toggle');
+            $('.single-toggle.toggle').toggleClass('active');
+            makeItRain();
+        });
+
+        makeItRain();
+    </script>
+    <style type="text/css">
+        a.glo {
+            color: #00c6ff;
+            padding: 15px 20px;
+            text-transform: uppercase;
+            width: 300px;
+            text-decoration: none;
+            text-align: center;
+            margin: 30px 0;
+            display: block;
+            background-image: linear-gradient(to left,transparent,transparent 50%,#00c6ff 50%,#00c6ff);
+            background-position: 100% 0;
+            background-size: 200% 100%;
+            transition: all .25s ease-in;
+            font: 400 18px tahoma;
+            border: 1px solid #00C6FF;
+            left: 200px;
+            border-radius: 10px;
+        }
+
+            a.glo:hover {
+                background-position: 0 0;
+                color: #fff;
+            }
+
+
+        .main {
+            position: relative;
+            z-index: 1000000
+        }
+
+        .text-shadow {
+            color: white;
+            text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+        }
+
+        html {
+            height: 100%;
+        }
+
+        body {
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+            background: linear-gradient(to bottom, #202020, #111119);
+        }
+
+        .rain {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+        }
+
+            .rain.back-row {
+                display: none;
+                z-index: 1;
+                bottom: 60px;
+                opacity: 0.5;
+            }
+
+        body.back-row-toggle .rain.back-row {
+            display: block;
+        }
+
+        .drop {
+            position: absolute;
+            bottom: 100%;
+            width: 15px;
+            height: 120px;
+            pointer-events: none;
+            animation: drop 0.5s linear infinite;
+        }
+
+        @@keyframes drop {
+            0% {
+                transform: translateY(0vh);
+            }
+
+            75% {
+                transform: translateY(90vh);
+            }
+
+            100% {
+                transform: translateY(90vh);
+            }
+        }
+
+        .stem {
+            width: 1px;
+            height: 60%;
+            margin-left: 7px;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.25));
+            animation: stem 0.5s linear infinite;
+        }
+
+        @@keyframes stem {
+            0% {
+                opacity: 1;
+            }
+
+            65% {
+                opacity: 1;
+            }
+
+            75% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        .splat {
+            width: 15px;
+            height: 10px;
+            border-top: 2px dotted rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            opacity: 1;
+            transform: scale(0);
+            animation: splat 0.5s linear infinite;
+            display: none;
+        }
+
+        body.splat-toggle .splat {
+            display: block;
+        }
+
+        @@keyframes splat {
+            0% {
+                opacity: 1;
+                transform: scale(0);
+            }
+
+            80% {
+                opacity: 1;
+                transform: scale(0);
+            }
+
+            90% {
+                opacity: 0.5;
+                transform: scale(1);
+            }
+
+            100% {
+                opacity: 0;
+                transform: scale(1.5);
+            }
+        }
+
+        .toggles {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+        }
+
+        .erorr_ {
+            position: absolute;
+            top: 35%;
+            font-size: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+        }
+
+        .toggle {
+            position: absolute;
+            left: 20px;
+            width: 50px;
+            height: 50px;
+            line-height: 51px;
+            box-sizing: border-box;
+            text-align: center;
+            font-family: sans-serif;
+            font-size: 10px;
+            font-weight: bold;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+            .toggle:hover {
+                background-color: rgba(255, 255, 255, 0.25);
+            }
+
+            .toggle:active {
+                background-color: rgba(255, 255, 255, 0.3);
+            }
+
+            .toggle.active {
+                background-color: rgba(255, 255, 255, 0.4);
+            }
+
+        .splat-toggle {
+            top: 20px;
+        }
+
+        .back-row-toggle {
+            top: 90px;
+            line-height: 12px;
+            padding-top: 14px;
+        }
+
+        .single-toggle {
+            top: 160px;
+        }
+
+        body.single-toggle .drop {
+            display: none;
+        }
+
+            body.single-toggle .drop:nth-child(10) {
+                display: block;
+            }
+    </style>
+</body>
+</html>
+

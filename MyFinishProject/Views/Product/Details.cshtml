@@ -1,0 +1,205 @@
+﻿@using MyFinishProject.Models.HelpersModels
+@model MyFinishProject.Models.HelpersModels.Product
+@{
+    ViewBag.Title = "Details";
+}
+<header>
+    <link rel="stylesheet" href="~/Content/DetailsView.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</header>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <img class=" img scale " src="data:image;base64,@System.Convert.ToBase64String(Model.Images ?? new byte[0])" onerror="this.src='';" />
+        </div>
+        <div class="col-md-5">
+            <div class="project-info-box">
+                <div>
+                    <div class="space radius">
+                        <p><b>Описание: @Html.DisplayFor(model => model.Descrption)</b></p>
+                    </div>
+                    <br />
+
+                    <div class="space">
+                        <p><b>Название товара: @Html.DisplayFor(model => model.Name)</b></p>
+                        <p><b>Производство:</b>  @Html.DisplayFor(model => model.Production)</p>
+                        <b>Цена:</b> @Html.DisplayFor(model => model.Price)<b>сом</b></p>
+                    </div>
+                    <br />
+
+                    <div class="space">
+                        <p><b>Имя:</b>@Html.DisplayFor(model => model.FirstName)</p>
+                        <p><b>Номер телефона:@Html.DisplayFor(model => model.PhoneNumber)</b></p>
+                        <p><b>Почта:</b> @Html.DisplayFor(model => model.Email)</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-info-box mt-0 mb-0">
+                <p class="mb-0 color">
+                    <span class="fw-bold mr-10 va-middle hide-mobile">Поделиться:</span>
+                    <a href="https://www.facebook.com" target="_blank" class="fa fa-facebook"></a>
+                    <a href="https://twitter.com/" target="_blank" class="fa fa-twitter"></a>
+                    <a href="https://www.pinterest.com" target="_blank" class="fa fa-pinterest"></a>
+                    <a href="https://www.instagram.com" target="_blank" class="fa fa-instagram"></a>
+                </p>
+                <div class="">
+                </div>
+                <br />
+                @if (ViewBag.Favourites is List<Favourites> favorites)
+                {
+                    if (User.Identity.IsAuthenticated)
+                    {
+                        if (favorites.Select(x => x.ProductId).Contains(Model.Id))
+                        {
+                            <button id="sumbit" type="submit" class="box-btn" style="color:red" onclick="location.href='https://localhost:44372/Product/AddToFavorites/@Model.Id'">
+                                <span class="glyphicon glyphicon-heart" style="color:red" aria-hidden="true"></span>
+                            </button>
+                        }
+                        else
+                        {
+                            <button type="submit" id="sumbit" class="box-btn" onclick="location.href='https://localhost:44372/Product/AddToFavorites/@Model.Id'">
+                                <span class="glyphicon glyphicon-heart-empty" style="color:gray" aria-hidden="true"></span>
+                            </button>
+                        }
+                    }
+                }
+            </div>
+        </div>
+    </div>
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div>
+            <div id="comments" style="display:block; height:400px;overflow-y:scroll"></div>
+            <div class="form-group" id="content">
+                <input type="hidden" name="ProductId" value="@Model.Id" />
+                <label for="textArea">Оставьте ваш комментарий</label>
+                @Html.ValidationMessageFor(model => model.Descrption, "", new { @class = "text-danger" })
+                <textarea class="form-control textarea" id="Description" cols="50" rows="4"></textarea>
+                <button type="submit" class="send btn btn-success" id="reload">Отправить</button>
+            </div>
+        </div>
+    }
+
+    @if (User.IsInRole("admin"))
+    {
+        <br />
+        <p>
+            <button type="button" class="button" data-toggle="modal" data-target="#exampleModalCenterChange">
+                Изменить
+            </button>
+            <button type="button" class="button" data-toggle="modal" data-target="#exampleModalCenter">
+                Удалить
+            </button>
+
+        </p>
+
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div>
+                        <h5 class="modal-title"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Вы точно хотите удалить?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" data-dismiss="modal">Отмена</button>
+                        <button type="button" class="btn btn-primary" onclick="location.href = '/Product/Delete/@Model.Id'">Удалить</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="exampleModalCenterChange" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div>
+                        <h5 class="modal-title"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Вы точно хотите изменить?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" data-dismiss="modal">Отмена</button>
+                        <button type="button" class="btn btn-primary" onclick="location.href='/Product/Edit/@Model.Id'">Изменить</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    <p>
+        <button class="button" onclick="location.href='/Product/Index'">Назад</button>
+    </p>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+        crossorigin="anonymous"></script>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script>
+        $(document).ready(function () {
+             $.ajax({
+                url: '/Product/GetComments/@Model.Id',
+                method: 'get',
+                dataType: 'html',
+                 success: function (data) {
+                     $('#comments').html(data)
+                }
+            })
+
+            $("#reload").click(function () {
+                $("#content").load("#content");
+                $.ajax({
+                    type: "POST",
+                    url: '/Product/SendComment/@Model.Id',
+                    data: { 'Description': $('#Description').val(), 'ProductId': @Model.Id },
+                    dataType: 'json',
+                    success: function (data) {
+                        $("#content").html(data)
+                    }
+                });
+            });
+
+            $(document).on('click', '.box-btn', function (event) {
+                $(this).find('.glyphicon').toggleClass('red').toggleClass('glyphicon-heart-empty glyphicon-heart');
+            });
+
+            $("#submit").click(function () {
+                $(".alert-success").slideToggle("slow").delay(2000).slideToggle("slow");
+            });
+        })
+</script>
+<style>
+    .hide {
+        display: none
+    }
+
+
+    .alert-success {
+        background: #f4f4f4;
+        color: #269612;
+        border-radius: 4px;
+        padding: 10px;
+    }
+
+    table {
+        max-width: 1140px;
+    }
+</style>
+
+

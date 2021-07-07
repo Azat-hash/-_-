@@ -1,0 +1,68 @@
+﻿
+@using MyFinishProject.Models.HelpersModels
+@model Product
+@{
+    Layout = null;
+}
+
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
+<div class="d-flex justify-content-between flex-wrap scale">
+    <div class="d-flex flex-column">
+        <p>@Model.Name</p>
+        <img class="img scale" src="data:image;base64,@System.Convert.ToBase64String(Model.Images ?? new byte[0])" onerror="this.src='';" onclick="location.href='/Product/Details/@Model.Id'" />
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+             <div class="form-actions no-color">
+                  <input type="submit" value="Delete" class="button" />
+                  <button class="button" onclick="location.href='/Product/Index'">Назад</button>
+             </div>
+        }
+    </div>
+</div>
+<style>
+    .button {
+        padding: 10px 20px;
+        font-size: 15px;
+        text-align: center;
+        cursor: pointer;
+        outline: none;
+        color: #fff;
+        background-color: #04AA6D;
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 9px #999;
+        height: 40px;
+    }
+
+        .button:hover {
+            background-color: #3e8e41
+        }
+
+        .button:active {
+            background-color: #3e8e41;
+            box-shadow: 0 5px #666;
+            transform: translateY(4px);
+        }
+
+    .img {
+        border-radius: 10px;
+        width: 300px;
+        height: 400px
+    }
+
+    .scale {
+        display: inline-block;
+        overflow: hidden;
+    }
+
+        .scale img {
+            transition: 1s;
+        }
+
+            .scale img:hover {
+                transform: scale(0.9);
+            }
+</style>
+

@@ -1,0 +1,178 @@
+﻿@model IEnumerable<MyFinishProject.Models.HelpersModels.Product>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+
+<header>
+    <link rel="stylesheet" href="~/Content/IndexSearchPage.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+</header>
+
+<div class="container my-4">
+    <div class="alert alert-success" role="alert">
+        <p data-dismiss="alert"><span aria-hidden="true">&times;</span> </p>
+        <strong></strong> Вы успешно вошли в главную страничку
+    </div>
+</div>
+<div class="main">
+    <div class="pull-left side-button-1-wr">
+        <label class="" for="side-checkbox">
+            <div class="side-b side-open side-button-1" style="color: white"> <img class="pull-right" style="width:30px;" src="../menu.svg" alt="Alternate Text" /> </div>
+        </label>
+    </div>
+    <input type="checkbox" id="side-checkbox" />
+    <div class="side-panel">
+        <label class="side-button-2 close-btn pull-left" for="side-checkbox"><img class="pull-right" src="https://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/256/Actions-window-close-icon.png" style="height:15px" /></label>
+        <div class="side-title">Панель:</div>
+        <p>Есть вопросы?</p>
+        <p>
+            Здравствуйте я автор этого проекта если у вас возникли какие-то вопросы можете мне на почту или номер Whatsapp
+            azatfreestyle@gmailcom
+            +996704565003
+            <br />
+        </p>
+        <p>
+            Если хотите нас поддержать вот наш номер карты ******************
+            Оставьте нам свои отзывы чтобы мы могли улучшить проект
+        </p>
+        <p>
+            <button type="submit" class="btn btn-primary" onclick="location.href='/Home/GetReview'">Оставить отзыв</button>
+        </p>
+        <p>
+            <button type="button" class="button btn btn-primary" data-toggle="modal" data-target="#example">
+                Удалить аккаунт
+            </button>
+        </p>
+    </div>
+</div>
+<p>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <button type="button" class="btn btn-success" onclick="location.href='/Product/Create'">Добавить товар</button>
+    }
+</p>
+@if (User.Identity.IsAuthenticated)
+{
+    using (Html.BeginForm("Search", "Product"))
+    {
+        <div class="search-wrapper">
+            <div class="input-holder">
+                <input type="text" class="search-input" name="productName" placeholder="Type to search" />
+                <button type="submit" class="search-icon" onclick="searchToggle(this, event);"><span></span></button>
+            </div>
+            <span class="close" onclick="searchToggle(this, event);"></span>
+        </div>
+    }
+}
+
+<br />
+<br>
+<div class="d-flex justify-content-between flex-wrap d-flex">
+    @foreach (var item in Model)
+    {
+        <div class="d-flex flex-column ">
+            <br />
+            <br />
+            <div class="gradient-border">
+                <img class="img scale gradient-border" src="data:image;base64,@System.Convert.ToBase64String(item.Images ?? new byte[0])" onerror="this.src='';" onclick="location.href='/Product/Details/@item.Id'" />
+                <div class="center-con">
+                    <div class="round">
+                        <div id="cta">
+                            <span class="arrow primera next" onclick="location.href='/Product/Details/@item.Id'"></span>
+                            <span class="arrow primera next" onclick="location.href='/Product/Details/@item.Id'"></span>
+                            <span class="arrow segunda next " onclick="location.href='/Product/Details/@item.Id'"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<button id="time" class="close" data-dismiss="alert" aria-hidden="true" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+</button>
+
+<script type="text/javascript">
+
+    $('.round').click(function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        $('.arrow').toggleClass('bounceAlpha');
+    });
+
+    function searchToggle(obj, evt) {
+        var container = $(obj).closest('.search-wrapper');
+        if (!container.hasClass('active')) {
+            container.addClass('active');
+            evt.preventDefault();
+        }
+        else if (container.hasClass('active') && $(obj).closest('.input-holder').length == 0) {
+            container.removeClass('active');
+            container.find('.search-input').val('');
+        }
+    }
+
+    window.setTimeout(function () {
+        $(".alert").fadeTo(500, 0).slideUp(500, function () {
+            $(this).remove();
+        });
+    }, 2000);
+
+</script>
+
+<style>
+    @@import url('https://fonts.googleapis.com/css?family=Raleway:200');
+
+    #box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 400px;
+        height: 180px;
+        color: white;
+        font-family: 'Raleway';
+        font-size: 3.1rem;
+    }
+
+    .gradient-border {
+        --borderWidth: 3px;
+        position: relative;
+        border-radius: var(--borderWidth);
+    }
+
+        .gradient-border:after {
+            content: '';
+            position: absolute;
+            top: calc(-1 * var(--borderWidth));
+            left: calc(-1 * var(--borderWidth));
+            height: calc(95% + var(--borderWidth) * 2);
+            width: calc(100% + var(--borderWidth) * 2);
+            background: linear-gradient(60deg, #f79533, #f37055, #ef4e7b, #a166ab, #5073b8, #1098ad, #07b39b, #6fba82);
+            border-radius: calc(2 * var(--borderWidth));
+            z-index: -1;
+            animation: animatedgradient 3s ease alternate infinite;
+            background-size: 300% 300%;
+        }
+
+
+    @@keyframes animatedgradient {
+        0% {
+            background-position: 0% 50%;
+        }
+
+        50% {
+            background-position: 100% 50%;
+        }
+
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+</style>

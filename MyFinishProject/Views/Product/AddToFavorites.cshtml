@@ -1,0 +1,22 @@
+﻿@using MyFinishProject.Models.HelpersModels
+@model List<Favourites>
+
+@{
+    ViewBag.Title = "AddToFavorites";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>AddToFavorites</h2>
+<div>
+    @foreach (var item in Model)
+    {
+        <p>@item.Product.Name | @item.User.Email</p>
+        <p>
+            <img src="data:image;base64,@System.Convert.ToBase64String(item.Product.Images ?? new byte[0])" style="width:300px;height:400px" onerror="this.src='';" />
+        </p>
+            <button type="button" onclick="location.href ='/Product/DeleteFromFavourites'@item.Product.Id">DD</button>
+    }
+</div>
+
+
+

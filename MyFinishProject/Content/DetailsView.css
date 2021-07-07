@@ -1,0 +1,173 @@
+﻿.textarea {
+    width: auto;
+}
+
+.color {
+    color: black;
+}
+
+.space {
+    padding: 5px;
+    background: #d8ebe8;
+    border: 1px;
+    border-radius: 10px;
+    width: 600px;
+}
+
+.button {
+    padding: 10px 20px;
+    font-size: 15px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: #fff;
+    background-color: #04AA6D;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 9px #999;
+}
+
+    .button:hover {
+        background-color: #3e8e41
+    }
+
+    .button:active {
+        background-color: #3e8e41;
+        box-shadow: 0 5px #666;
+        transform: translateY(4px);
+    }
+
+.border {
+    border-top: double;
+}
+
+.icon {
+    height: 100px;
+    width: 50px;
+}
+
+
+.box-btn {
+    float: left;
+    background: transparent;
+    font-size: 40px;
+    color: #4D4E56;
+    font-weight: 200;
+    cursor: pointer;
+    border-radius: 1.6px;
+    line-height: 0.5;
+    border: none;
+    outline: none;
+}
+
+.glyphicon {
+    transition: color .3s linear;
+}
+
+.box-btn .red {
+    color: red;
+}
+
+.img {
+    border-radius: 10px;
+    width: 300px;
+    height: 400px
+}
+
+.logimg {
+    width: 20px;
+    height: 10px;
+    text-align: center;
+}
+
+.fa {
+    padding: 20px;
+    font-size: 25px;
+    width: 10px;
+    text-align: center;
+    text-decoration: none;
+    margin: 7px 5px;
+}
+
+    .fa:hover {
+        opacity: 0.9;
+    }
+
+.fa-facebook {
+    color: white;
+    width: 15px;
+    height: 20px;
+    text-align: center;
+    margin-top: 70px;
+    background: #3B5998;
+    border-radius: 10px;
+    position: relative
+}
+
+    .fa-facebook-f:before, .fa-facebook:before {
+        content: "\f09a";
+        position: absolute;
+        top: 25%;
+        left: 25%
+    }
+
+.fa-twitter {
+    background: #55ACEE;
+    color: white;
+    border-radius: 10px;
+    width: 15px;
+    height: 20px;
+    text-align: center;
+    justify-content: space-between;
+    align-items: center;
+    position: relative
+}
+
+    .fa-twitter:before {
+        content: "\f099";
+        position: absolute;
+        top: 25%;
+        left: 25%
+    }
+
+.fa-instagram {
+    background: #125688;
+    color: white;
+    border-radius: 10px;
+    width: 15px;
+    height: 20px;
+    text-align: center;
+    position: relative
+}
+
+    .fa-instagram:before {
+        content: "\f16d";
+        position: absolute;
+        top: 25%;
+        left: 25%
+    }
+
+.fa-pinterest {
+    background: #cb2027;
+    color: white;
+    border-radius: 10px;
+    width: 15px;
+    height: 20px;
+    text-align: center;
+    position: relative
+}
+
+    .fa-pinterest:before {
+        content: "\f0d2";
+        position: absolute;
+        top: 25%;
+        left: 25%
+    }
+
+.scale {
+    transition: 1s;
+}
+
+    .scale:hover {
+        transform: scale(0.9);
+    }

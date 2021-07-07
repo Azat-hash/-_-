@@ -1,0 +1,55 @@
+﻿
+
+@model MyFinishProject.Models.ExternalLoginListViewModel
+@using Microsoft.Owin.Security
+
+<hr />
+@{
+    var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
+    if (loginProviders.Count() == 0)
+    {
+        <div>
+            <p>
+                Внешние службы проверки подлинности не настроены. В <a href="https://go.microsoft.com/fwlink/?LinkId=403804">этой статье</a>
+                приведены сведения о настройке входа через внешние службы для этого приложения ASP.NET.
+            </p>
+        </div>
+    }
+    else
+    {
+        using (Html.BeginForm("ExternalLogin", "Account", new { ReturnUrl = Model.ReturnUrl }))
+        {
+            @Html.AntiForgeryToken()
+            <div id="socialLoginList">
+                <p>
+                    @foreach (AuthenticationDescription p in loginProviders)
+                    {
+
+                     
+                    <div class="g" >
+                        <button type="submit" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Войти с помощью учетной записи @p.Caption">       <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJRPM0YKkH8TPMNGEYHITBhn1GIyZfNcIvSw&usqp=CAU" />     </button>
+                    </div>
+                    }
+                </p>
+
+                <style>
+                    .g {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
+                    
+                    button {
+                        border: none;
+                    }
+                    
+                    button img {
+                        width: 70px;
+                    }
+
+                </style>
+            </div>
+        }
+    }
+}
+

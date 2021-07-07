@@ -1,0 +1,19 @@
+﻿@using MyFinishProject.Models.HelpersModels
+@model Favourites
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var product = new Product(); 
+}
+
+<div>
+    <table>
+        <tr>
+            <td>@product.Name</td>
+        </tr>
+        <tr>
+            <td><button type="button" onclick="location.href = '/DeleteFromFavourites/Product'">DD</button></td>
+        </tr>
+    </table>
+</div>

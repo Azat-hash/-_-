@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = "Подтверждение почты";
+}
+
+<link rel="stylesheet" href="~/Content/LoginForm.css"/>
+<div class="login">
+    <h2 style="text-align:center">@ViewBag.Title.</h2>
+
+    <div class="login-form">
+        <p>
+            Благодарим за подтверждение электронной почты. @Html.ActionLink("Щелкните здесь для входа", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
+        </p>
+    </div>
+</div>

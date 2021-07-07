@@ -1,0 +1,169 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link type="text/css" rel="stylesheet" href="~/Content/HomeIndex.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="waveWrapper waveAnimation">
+        <div class="waveWrapperInner bgTop">
+            <div class="wave waveTop" style="background-image: url('http://front-end-noobs.com/jecko/img/wave-top.png')"></div>
+        </div>
+        <div class="waveWrapperInner bgMiddle">
+            <div class="wave waveMiddle" style="background-image: url('http://front-end-noobs.com/jecko/img/wave-mid.png')"></div>
+        </div>
+        <div class="waveWrapperInner bgBottom">
+            <div class="wave waveBottom" style="background-image: url('http://front-end-noobs.com/jecko/img/wave-bot.png')"></div>
+        </div>
+        <div class="main">
+           
+            <div class="pull-left side-button-1-wr">
+                <label class="" for="side-checkbox">
+                    <div class="side-b side-open side-button-1" style="color: white"> <img style="width:30px;" src="../menu.svg" alt="Alternate Text" /> </div>
+                </label>
+            </div>
+            <div class="container text-center">
+                <div class="d-flex" style="justify-content:space-between; align-items:center;">
+                    <div class="d-flex">
+
+                        <h1 class="m  text-shadow">ALLIANZ</h1>
+                    </div>
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <form class="form-inline">
+                            <a type="button" class="btn btn-danger" href="javascript:document.getElementById('logoutForm').submit()">Выйти</a>
+                        </form>
+                    }
+                    else
+                    {
+                        <form class="form-inline">
+                            <button type="button" class="btn btn-success" onclick="location.href='/Account/Login'">Войти</button>
+                        </form>
+                    }
+                </div>
+                <div class="text-center">
+                    <div class="col-sm-12 ">
+                        <div>
+                            <a href="https://localhost:44372/Product/Index" style="text-align:center;" class="glo btt-center">Перейти на страничку</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <input type="checkbox" id="side-checkbox" />
+            <div class="side-panel">
+                <label class="side-button-2 close-btn pull-right" for="side-checkbox"><img src="https://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/256/Actions-window-close-icon.png" style="height:15px" /></label>
+                <div class="side-title">Панель:</div>
+                <p>Есть вопросы?</p>
+                <p>
+                    Здравствуйте я автор этого проекта если у вас возникли какие-то вопросы можете мне на почту или номер Whatsapp
+                    azatfreestyle@gmailcom
+                    +996704565003
+                    <br />
+                </p>
+                <p>
+                    Если хотите нас поддержать вот наш номер карты ******************
+                    Оставьте нам свои отзывы чтобы мы могли улучшить проект
+                </p>
+                <p>
+                    <button type="submit" class="btn btn-primary" onclick="location.href='/Home/GetReview'">Оставить отзыв</button>
+                </p>
+                <p>
+                    <button type="button" class="button btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                        Удалить аккаунт
+                    </button>
+                </p>
+
+            </div>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4 ">
+                        <div class="panel panel-primary color">
+                            <div class="panel-heading"></div>
+                            <div class="panel-body"><a href="https://www.apple.com/" target="_blank"><img src="https://s0.rbk.ru/v6_top_pics/resized/500x312_crop/media/img/7/34/756129459371347.jpg" class="img-responsive scale  img-radius color" style="width:100%;height:200px" alt="Image"></a></div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-sm-4 ">
+                        <div class="panel panel-danger color">
+                            <div class="panel-heading"></div>
+                            <div class="panel-body"><a href="https://us.puma.com/" target="_blank"><img src="https://images-na.ssl-images-amazon.com/images/I/51I0nOcguOL._AC_UL1500_.jpg" class="img-responsive scale  img-radius color" style="width: 100%;height: 200px" alt="Image"></a></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="panel panel-success color">
+                            <div class="panel-heading"></div>
+                            <div class="panel-body"><a href="https://www.adidas.com/us" target="_blank"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLSPqZG73oi24xYQWfh8UA99qx3zbdA8xKmQ&usqp=CAU" class="img-responsive scale color img-radius" style="width:100%;height:200px" alt="Image"></a></div>
+                        </div>
+                    </div>
+                </div>
+            </div><br>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="panel panel-primary color">
+                            <div class="panel-heading"></div>
+                            <div class="panel-body"><a href="https://www.samsung.com/ru/smartphones/" target="_blank"><i class="color"><img src="https://www.nicepng.com/png/detail/386-3864555_samsung-logo-black-samsung-icon-black-and-white.png" class="img-responsive scale color img-radius" style="width:100%;height:200px" alt="Image"></i></a></div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-sm-4">
+                        <div class="panel panel-primary color">
+                            <div class="panel-heading"></div>
+                            <div class="panel-body color"><a href="https://www.nike.com/" target="_blank"><i class="color"><img src="https://ichef.bbci.co.uk/news/640/cpsprodpb/B9FF/production/_117751674_satan-shoes1.jpg" class="img-responsive scale color img-radius" style="width:100%;height:200px" alt="Image"></i></a></div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-sm-4">
+                        <div class="panel panel-primary color">
+                            <div class="panel-heading"></div>
+                            <div class="panel-body"><a href="https://o.kg/ru/chastnym-klientam/" target="_blank"><img src="https://yt3.ggpht.com/ytc/AAUvwniq448P-o7FHmhiWq0ThKNHrtBEP67Zib1CRVbm8Q=s900-c-k-c0x00ffffff-no-rj" class="img-responsive scale color img-radius" style="width:100%;height:200px" alt="Image"></a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <br><br>
+
+    <style>
+        a.glo {
+            margin: 30px auto;
+        }
+    </style>
+    <script type="text/javascript">
+        jQuery(function ($) {
+            $(document).mouseup(function (e) {
+                var div = $("#popup");
+                if (!div.is(e.target)
+                    && div.has(e.target).length === 0) {
+                    div.hide();
+                }
+            });
+        });
+
+        window.setTimeout(function () {
+            $(".alert").fadeTo(500, 0).slideUp(500, function () {
+                $(this).remove();
+            });
+        }, 3000);
+    </script>
+
+    <br />
+    <br />
+</body>
+</html>
+

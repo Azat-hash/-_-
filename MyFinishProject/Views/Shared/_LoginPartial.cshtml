@@ -1,0 +1,57 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+                <a class="nav-link">Здравствуйте  @User.Identity.GetUserName() !</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link"id="logoutForm" href="javascript:document.getElementById('logoutForm').submit()">Выйти</a>
+                <a class="nav-link" id="quit"></a>          
+            </li>
+        </ul>
+
+        <div class="modal fade" id="logoutForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div>
+                        <h5 class="modal-title"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Выйти из аккаунта?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+            <a class="nav-link" href="/Account/Register">Регистрация</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/Account/Login">Выполнить вход </a>
+        </li>
+    </ul>
+}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+        crossorigin="anonymous"></script>
+<script type="text/javascript">
+    $("#logoutForm").click(function () {
+        $(document).submit();
+    })
+</script>
